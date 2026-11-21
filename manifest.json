@@ -1,13 +1,22 @@
 {
-  "name": "GE Panel Directory",
-  "short_name": "GE Panel",
+  "name": "GE PANEL",
+  "short_name": "GE PANEL",
   "description": "Great Eastern panel hospitals, TGJ clinics and panel clinics across Malaysia",
   "start_url": "./index.html",
   "display": "standalone",
   "background_color": "#0b1f33",
   "theme_color": "#d6001c",
   "icons": [
-    {"src": "icon-192.png", "sizes": "192x192", "type": "image/png"},
-    {"src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable"}
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
   ]
 }
