@@ -221,7 +221,7 @@ function fillGotcContacts(){
     return `<div class="row"><div class="hn">${esc(c.n)}</div><div class="hv">${esc(c.v)}</div><div class="hb">${btns}</div></div>`;
   }).join('');
   const ab=document.getElementById('gotcAmbas');
-  ab.innerHTML=GOTC_AMBAS.map(a=>`<div class="row"><div class="hn">${esc(a.s)} &mdash; ${esc(a.n)}</div><div class="hb"><a class="c" href="tel:+60${a.p.replace(/[^0-9]/g,'').replace(/^0/,'')}">Call ${a.p}</a><a class="w" href="${waHref(a.p,'my client\\'s Great Journey hospital')}">WhatsApp</a></div></div>`).join('');
+  ab.innerHTML=GOTC_AMBAS.map(a=>`<div class="row"><div class="hn">${esc(a.s)} &mdash; ${esc(a.n)}</div><div class="hb"><a class="c" href="tel:+60${a.p.replace(/[^0-9]/g,'').replace(/^0/,'')}">Call ${a.p}</a><a class="w" href="${waHref(a.p,'the Great Journey hospital')}">WhatsApp</a></div></div>`).join('');
 }
 
 function popup(h){
