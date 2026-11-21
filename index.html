@@ -53,6 +53,8 @@ h1{font-size:15.5px;margin:0;font-weight:700;line-height:1.25}
 .tag.warn{background:#fff3f3;color:#b42318}
 .tag.doc{background:#f4f1fb;color:#5b3fa8}
 .tag.fac{background:#eef7f1;color:#1d6b2f}
+.btn.wa{background:#e7f8ef;color:#128c4a}
+.btns{flex-wrap:wrap}
 .btns{display:flex;gap:7px;margin:8px 0 0 38px;flex-wrap:wrap}
 .btn{text-decoration:none;font-size:12.5px;font-weight:600;padding:7px 11px;border-radius:9px;border:1px solid var(--line);color:#1b2430;background:#fff}
 .btn.gm{border-color:#d8e3d8;background:#f2f9f2;color:#1d6b2f}
@@ -159,6 +161,8 @@ const telv=t=>'tel:'+(t||'').replace(/[^0-9+]/g,'');
 const hav=(a,b,c,d)=>{const R=6371,r=Math.PI/180;const dl=(c-a)*r,dn=(d-b)*r;const h=Math.sin(dl/2)**2+Math.cos(a*r)*Math.cos(c*r)*Math.sin(dn/2)**2;return 2*R*Math.asin(Math.sqrt(h));};
 const fmtKm=k=>k<1?Math.round(k*1000)+' m':(k<10?k.toFixed(1):Math.round(k))+' km';
 const esc=s=>String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+const waMsg=h=>'Hi, this is TEE KOK WEI (GE agent, 6328617). My client [CLIENT NAME] ([POLICY NO.]) is admitted at '+h.name+' on [DATE], room [WARD/CLASS]. As a Great Eastern policyholder at a Great Journey Hospital, please arrange the Gestures of Care (admission gift / fruit basket). Kindly confirm once arranged. Thank you.';
+const wa=h=>'https://wa.me/?text='+encodeURIComponent(waMsg(h));
 
 function popup(h){
   const extra = (h.hours ? `<div style="font-size:11.5px;color:#667085;margin-bottom:2px">${esc(h.hours)}</div>` : '')
@@ -210,6 +214,7 @@ function itemHTML(h, set){
       <div class="btns">
         <a class="btn gm" href="${gmaps(h)}" target="_blank" rel="noopener">Google Maps</a>
         <a class="btn wz" href="${waze(h)}" target="_blank" rel="noopener">Waze</a>
+        ${(set==='h' && h.tgj)?`<a class="btn wa" href="${wa(h)}" target="_blank" rel="noopener">WhatsApp</a>`:''}
         ${h.tel?`<a class="btn tl" href="${telv(h.tel)}">Call</a>`:''}
       </div></div>`;
 }
