@@ -25,7 +25,7 @@ header{position:sticky;top:0;z-index:1500;background:linear-gradient(135deg,#1b2
 h1{font-size:15.5px;margin:0;font-weight:700;line-height:1.25}
 .sub{font-size:10.5px;opacity:.78;margin-top:2px}
 .tabs{display:flex;gap:5px;margin-top:10px;background:rgba(255,255,255,.12);padding:4px;border-radius:12px}
-.tab{flex:1;text-align:center;padding:7px 3px;border-radius:9px;font-size:12.5px;font-weight:600;cursor:pointer;color:#dfe4ea;transition:.15s;line-height:1.15}
+.tab{flex:1;text-align:center;padding:7px 2px;border-radius:9px;font-size:11.5px;font-weight:600;cursor:pointer;color:#dfe4ea;transition:.15s;line-height:1.15}
 .tab.on{background:#fff;color:#1b2430}
 .tab small{display:block;font-size:10px;font-weight:500;opacity:.7;margin-top:1px}
 .searchrow{margin-top:9px;display:flex;gap:7px}
@@ -65,6 +65,16 @@ h1{font-size:15.5px;margin:0;font-weight:700;line-height:1.25}
 .me-lbl{position:absolute;left:50%;transform:translateX(-50%);top:-8px;background:#ff2d55;animation:lblblink 1.1s ease-in-out infinite}
 @keyframes lblblink{0%,100%{background:#ff2d55}50%{background:#ffb703}}color:#fff;font-size:9.5px;font-weight:800;letter-spacing:.5px;padding:1px 6px;border-radius:8px;white-space:nowrap;z-index:4;box-shadow:0 1px 4px rgba(0,0,0,.3)}
 @keyframes mep{0%{transform:scale(.7);opacity:.85}70%{transform:scale(2.2);opacity:0}100%{opacity:0}}
+#gotc{display:none;padding:16px 16px 26px;max-width:920px;margin:0 auto}
+#gotc .hero{background:linear-gradient(135deg,#d6001c,#8a0012);color:#fff;border-radius:14px;padding:18px 18px 16px;margin-bottom:14px}
+#gotc .hero h2{margin:0;font-size:19px;letter-spacing:.2px}
+#gotc .hero p{margin:6px 0 0;font-size:12.5px;opacity:.92;line-height:1.55}
+#gotc .card{background:#fff;border:1px solid #e6e8ec;border-radius:12px;padding:13px 14px;margin-bottom:10px}
+#gotc .card .ttl{font-weight:800;font-size:13.5px;color:#1b2430;margin-bottom:4px}
+#gotc .card .ttl span{font-size:17px;margin-right:6px}
+#gotc .card .txt{font-size:12.5px;color:#4a5563;line-height:1.6}
+#gotc .fine{background:#fff7ed;border:1px solid #f6dcb0;border-radius:12px;padding:12px 14px;font-size:12px;color:#8a5a12;line-height:1.6}
+#gotc .fine b{color:#7a4b08}
 .note{font-size:11.5px;color:#7b8794;padding:4px 18px 30px;line-height:1.65}
 .note b{color:#475467}
 .nores{text-align:center;color:#98a2b3;padding:28px 0;font-size:13px}
@@ -89,6 +99,7 @@ h1{font-size:15.5px;margin:0;font-weight:700;line-height:1.25}
     <div class="tab on" data-set="h">Panel Hospitals<small>128 · 2026</small></div>
     <div class="tab" data-set="c">TGJ Clinics<small>1,629 · 2026</small></div>
     <div class="tab" data-set="n">Panel Clinics<small>539 · New Business</small></div>
+    <div class="tab" data-set="g">Gestures of Care<small>Great Journey</small></div>
   </div>
   <div class="searchrow"><input id="q" type="search" placeholder="Search name, area, doctor or postcode…"><button id="near">📍 Near me</button></div>
   <div class="chips" id="chips"></div>
@@ -96,6 +107,21 @@ h1{font-size:15.5px;margin:0;font-weight:700;line-height:1.25}
 <div id="map"></div>
 <div class="stats"><span id="cnt"></span><span>Tap a pin for maps</span></div>
 <div class="list" id="list"></div>
+<section id="gotc">
+  <div class="hero">
+    <h2>Gestures of Care</h2>
+    <p>What you get when you are admitted to a <b>The Great Journey Hospital</b>. Applies to policyholders with a medical plan that covers Hospitalisation. Terms &amp; conditions apply.</p>
+  </div>
+  <div class="card"><div class="ttl"><span>🎁</span>Gestures of Care on admission</div><div class="txt">Admission gift, fruit basket and similar gestures of care when you are warded.</div></div>
+  <div class="card"><div class="ttl"><span>💸</span>Fee waivers</div><div class="txt">Admission Deposit, Admission Fee, Identity (ID) band charges, and COVID-19 screening test are waived.</div></div>
+  <div class="card"><div class="ttl"><span>⚡</span>Priority admission</div><div class="txt">Priority admission counters, ticketing machines and exclusive lounges for Great Eastern policyholders.</div></div>
+  <div class="card"><div class="ttl"><span>🧸</span>Kiddo Express Programme</div><div class="txt">A smoother, child-friendly admission experience for your children.</div></div>
+  <div class="card"><div class="ttl"><span>🚪</span>Early discharge, less waiting</div><div class="txt">Discharge without having to wait for the Final Guarantee Letter &#45; with or without a minimal deposit.</div></div>
+  <div class="card"><div class="ttl"><span>🤝</span>Great Assist</div><div class="txt">Dedicated hospital support for you during your stay.</div></div>
+  <div class="fine"><b>Important:</b> These privileges are offered at <b>The Great Journey Hospitals only</b>, not at every panel hospital. They are subject to availability and may change; confirm with the hospital admission counter or your agent before you are warded. Eligibility depends on your policy contract &#45; refer to your medical plan for the Hospitalisation benefit.</div>
+  <div style="font-size:11.5px;color:#98a2b3;margin-top:12px;line-height:1.7">Source: Great Eastern Malaysia &#45; The Great Journey Hospital privileges (greateasternlife.com / greateasterntakaful.com).</div>
+</section>
+
 <div class="note">
   <b>How accurate are the pins?</b> Panel hospitals sit on their actual location; clinics sit on the street / neighbourhood their address belongs to, so a pin shows the area — the written address on the card is the exact one. <b>Always navigate with Google Maps / Waze</b>, which use the full address.<br><br>
   <b>Sources:</b> Great Eastern ePartner — Panel Hospitals Listing (15/09/2026); The Great Journey Clinic Listing (05/05/2026); New Business Medical → Panel Clinic Listing (live). Great Eastern may change the panel at any time; latest list at www.greateasternlife.com.
@@ -169,8 +195,23 @@ function itemHTML(h, set){
 }
 
 function render(){
-  const set=META[setKey];
+  const isPrv = setKey==='g';
+  document.getElementById('gotc').style.display = isPrv?'block':'none';
+  document.getElementById('map').style.display = isPrv?'none':'block';
+  document.getElementById('list').style.display = isPrv?'block':'block';
+  document.querySelector('.stats').style.display = isPrv?'none':'flex';
   document.querySelectorAll('.tab').forEach(t=>t.classList.toggle('on', t.dataset.set===setKey));
+  document.getElementById('chips').style.display = isPrv?'none':'flex';
+  document.querySelector('.searchrow').style.display = isPrv?'none':'flex';
+  document.querySelector('.note').style.display = isPrv?'none':'block';
+  document.querySelector('.note').style.display = isPrv?'none':'block';
+  if(isPrv){
+    document.getElementById('list').innerHTML='';
+    document.getElementById('cnt').textContent='';
+    if(clusterL){map.removeLayer(clusterL);clusterL=null;}
+    return;
+  }
+  const set=META[setKey];
   let arr=DATA[setKey], shown=arr.filter(match);
   const nearOn = nearMe && userLoc;
   if(nearOn) shown = shown.slice().sort((x,y)=>hav(userLoc.lat,userLoc.lng,x.lat,x.lng)-hav(userLoc.lat,userLoc.lng,y.lat,y.lng));
