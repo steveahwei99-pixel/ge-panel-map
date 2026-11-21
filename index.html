@@ -79,6 +79,17 @@ h1{font-size:15.5px;margin:0;font-weight:700;line-height:1.25}
 #gotc .fine b{color:#7a4b08}
 .tag.tgj{background:#fff1f2;color:#b42318 !important;border:1px solid #f5c2c7;font-weight:700}
 #gotc .go{display:inline-block;margin-top:6px;background:#d6001c;color:#fff;border:0;border-radius:10px;padding:11px 16px;font-size:13px;font-weight:700;cursor:pointer}
+#gotc .oc{margin:14px 0 0;background:#fff;border:1px solid #e6e8ec;border-radius:12px;padding:12px 14px}
+#gotc .oc h3{margin:0 0 2px;font-size:14px;color:#1b2430;letter-spacing:.2px}
+#gotc .oc .sub{font-size:11.5px;color:#667085;margin-bottom:10px;line-height:1.5}
+#gotc .oc .row{padding:9px 0;border-top:1px dashed #e6e8ec}
+#gotc .oc .row:first-of-type{border-top:0}
+#gotc .oc .hn{font-size:13px;font-weight:700;color:#1b2430}
+#gotc .oc .hv{font-size:12px;color:#475467;margin-top:2px}
+#gotc .oc .hb{display:flex;gap:6px;flex-wrap:wrap;margin-top:6px}
+#gotc .oc .hb a,#gotc .oc .hb span{font-size:11.5px;font-weight:700;border-radius:8px;padding:6px 10px;text-decoration:none}
+#gotc .oc .hb .w{background:#e7f8ee;color:#0f7a3d}
+#gotc .oc .hb .c{background:#fff0f0;color:#b42318}
 #gotc .ct{margin:12px 0 0;background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:12px 14px;font-size:12.5px;color:#334155;line-height:1.75}
 #gotc .ct b{color:#0f172a}
 #gotc .ct a{color:#b42318;text-decoration:none;font-weight:600}
@@ -126,12 +137,22 @@ h1{font-size:15.5px;margin:0;font-weight:700;line-height:1.25}
   <div class="card"><div class="ttl"><span>🚪</span>Early discharge, less waiting</div><div class="txt">Discharge without having to wait for the Final Guarantee Letter &#45; with or without a minimal deposit.</div></div>
   <div class="card"><div class="ttl"><span>🤝</span>Great Assist</div><div class="txt">Dedicated hospital support for you during your stay.</div></div>
   <div class="fine"><b>Important:</b> These privileges are offered at <b>The Great Journey Hospitals only</b>, not at every panel hospital. They are subject to availability and may change; confirm with the hospital admission counter or your agent before you are warded. Eligibility depends on your policy contract &#45; refer to your medical plan for the Hospitalisation benefit.</div>
+  <div class="oc">
+    <h3>🎁 Official hospital contacts for Gestures of Care</h3>
+    <div class="sub">Taken from Great Eastern circular <b>OPS/5065/JUNE 2026</b> &mdash; Renewal of The Great Journey Hospital Network (24 June 2026), Appendix 5. Call or WhatsApp the hospital <b>before</b> admission so the gift / fruit basket is arranged.</div>
+    <div id="gotcContacts"></div>
+  </div>
+  <div class="oc">
+    <h3>🤝 The Great Journey Ambassador (by state)</h3>
+    <div class="sub">Great Eastern&rsquo;s own liaison for Great Journey hospitals &mdash; Appendix 6 of the same circular. Useful when the hospital cannot confirm your privileges.</div>
+    <div id="gotcAmbas"></div>
+  </div>
   <div class="ct">
     <b>How to confirm before admission</b><br>
     Great Eastern Healthcare Services &#45; hospital admission &amp; guarantee letter<br>
     ☎ <a href="tel:1300130018">1300-13-0018</a> &nbsp;·&nbsp; ✉ <a href="mailto:healthcareservices@greateasternlife.com">healthcareservices@greateasternlife.com</a><br>
     Customer Service Careline: <a href="tel:1300130088">1300-1300 88</a> &nbsp;·&nbsp; Overseas: <a href="tel:+60342598888">+603 4259 8888</a><br>
-    WhatsApp is not an official Great Eastern channel &#45; call or email instead, or ask your agent (TEE KOK WEI, 6328617).
+    WhatsApp is not an official Great Eastern channel &#45; for the gift, use the hospital contact list above; for the guarantee letter, call or email Great Eastern.
   </div>
   <div style="margin-top:16px;font-size:15px;font-weight:800;color:#1b2430">The 85 Great Journey hospitals in this list</div>
   <div style="font-size:12px;color:#667085;margin:4px 0 10px">Tap Call to ring the hospital, or Google Maps / Waze to navigate.</div>
@@ -163,6 +184,45 @@ const fmtKm=k=>k<1?Math.round(k*1000)+' m':(k<10?k.toFixed(1):Math.round(k))+' k
 const esc=s=>String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
 const waMsg=h=>'Hi, this is TEE KOK WEI (GE agent, 6328617). My client [CLIENT NAME] ([POLICY NO.]) is admitted at '+h.name+' on [DATE], room [WARD/CLASS]. As a Great Eastern policyholder at a Great Journey Hospital, please arrange the Gestures of Care (admission gift / fruit basket). Kindly confirm once arranged. Thank you.';
 const wa=h=>'https://wa.me/?text='+encodeURIComponent(waMsg(h));
+
+// Official Gesture of Care contacts — eCircular OPS/5065/JUNE 2026, Appendix 5
+const GOTC_CONTACTS=[
+  {n:"Bukit Tinggi Medical Centre",v:"Customer Service",p:"012-341 1584",w:0},
+  {n:"Columbia Asia Hospital",v:"Batu Kawan, Bukit Jalil, Bukit Rimau, Cheras, Klang, Puchong, Seremban, Setapak, Iskandar Puteri, Taiping, Tebrau",p:"012-262 5787",w:1},
+  {n:"Institut Jantung Negara (IJN)",v:"Ms. Zeenat",p:"016-338 9082",w:0},
+  {n:"Loh Guan Lye Specialists Centre",v:"Redemption counter",p:"017-472 0628",w:1},
+  {n:"Mahkota Medical Centre",v:"Redemption counter",p:"012-697 2911",w:1},
+  {n:"Oriental Melaka Straits Medical Centre",v:"Redemption counter",p:"010-213 5311",w:0},
+  {n:"Prince Court Medical Centre",v:"Redemption counter",p:"012-907 7314",w:1},
+  {n:"Regency Specialist Hospital",v:"Mr. Victor Lim / Mr. Danny",p:"016-703 2022 / 018-779 1228",w:0},
+  {n:"Subang Jaya Medical Centre",v:"Redemption counter",p:"019-340 6719",w:1},
+  {n:"Sunway Medical Centre",v:"Redemption counter",p:"019-263 2337",w:1},
+  {n:"Sunway Medical Centre Velocity",v:"Redemption counter",p:"019-223 8267 / 019-320 2291",w:0}
+];
+// The Great Journey Ambassador — Appendix 6
+const GOTC_AMBAS=[
+  {s:"W.P. Kuala Lumpur",n:"Claire Yap Yal Wei",p:"012-621 7969"},
+  {s:"Selangor",n:"Lily Wong Sheau Yuen",p:"016-877 6464"},
+  {s:"Negeri Sembilan",n:"Ho Lee Nai",p:"011-2525 1313"},
+  {s:"Kelantan",n:"Shahida Abdul Malek",p:"019-930 9160"},
+  {s:"Terengganu",n:"Annmaria Susan John Morris",p:"016-605 0717"},
+  {s:"Pahang",n:"Malathi Rasalingam",p:"016-259 3295"},
+  {s:"Sabah",n:"Adelia Lee Oi Jiuan",p:"012-938 1312"},
+  {s:"Sarawak",n:"Joyce Yong Ee Lee",p:"012-604 8728"},
+  {s:"Sarawak",n:"Zulaida Salim",p:"012-308 1700"}
+];
+const waIntl=p=>{const d=(p.match(/[0-9]+/g)||[]).join('');return d.replace(/^0/, '60');};
+const waHref=(p,who)=>'https://wa.me/'+waIntl(p)+'?text='+encodeURIComponent('Hi, this is TEE KOK WEI (GE agent, 6328617). My client [CLIENT NAME] ([POLICY NO.]) is admitted at '+who+' on [DATE], room [WARD/CLASS]. As a Great Eastern policyholder at a Great Journey Hospital, please help arrange the Gestures of Care (admission gift / fruit basket). Kindly confirm once arranged. Thank you.');
+function fillGotcContacts(){
+  const box=document.getElementById('gotcContacts');
+  box.innerHTML=GOTC_CONTACTS.map(c=>{
+    const nums=c.p.split('/').map(s=>s.trim()).filter(Boolean);
+    const btns=nums.map(n=>`<a class="${c.w?'w':'c'}" href="${c.w?waHref(n,c.n):'tel:'+n.replace(/[^0-9+]/g,'')}">${c.w?'WhatsApp':'Call'} ${n}</a>`).join('');
+    return `<div class="row"><div class="hn">${esc(c.n)}</div><div class="hv">${esc(c.v)}</div><div class="hb">${btns}</div></div>`;
+  }).join('');
+  const ab=document.getElementById('gotcAmbas');
+  ab.innerHTML=GOTC_AMBAS.map(a=>`<div class="row"><div class="hn">${esc(a.s)} &mdash; ${esc(a.n)}</div><div class="hb"><a class="c" href="tel:+60${a.p.replace(/[^0-9]/g,'').replace(/^0/,'')}">Call ${a.p}</a><a class="w" href="${waHref(a.p,'my client\\'s Great Journey hospital')}">WhatsApp</a></div></div>`).join('');
+}
 
 function popup(h){
   const extra = (h.hours ? `<div style="font-size:11.5px;color:#667085;margin-bottom:2px">${esc(h.hours)}</div>` : '')
@@ -220,6 +280,7 @@ function itemHTML(h, set){
 }
 
 function fillGotc(){
+  fillGotcContacts();
   const box=document.getElementById('gotcList');
   if(box.dataset.filled==='1') return;
   const arr=DATA.h.filter(h=>h.tgj), groups={};
