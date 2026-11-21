@@ -129,7 +129,7 @@ h1{font-size:16px;margin:0;font-weight:800;line-height:1.2;letter-spacing:.2px}
 #gotc .oc .sub{font-size:11.5px;color:var(--muted);line-height:1.55}
 #gotc .oc .row{padding:12px 0;border-top:1px dashed #eceff4;display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between}
 #gotc .oc .row:first-of-type{border-top:0}
-#gotc .oc .row>div:first-child{min-width:150px;flex:1}
+#gotc .oc .row .hi{min-width:170px;flex:1 1 260px}
 #gotc .oc .hn{font-size:13px;font-weight:800;color:#0f172a;line-height:1.35}
 #gotc .oc .hv{font-size:11.5px;color:#667085;margin-top:3px}
 #gotc .oc .hb{display:flex;gap:6px;flex-wrap:wrap}
@@ -278,10 +278,10 @@ function fillGotcContacts(){
   box.innerHTML=GOTC_CONTACTS.map(c=>{
     const prim=`<a class="${c.w?'w':'c'}" href="${c.w?waHref(c.p,c.n):'tel:'+c.p.replace(/[^0-9+]/g,'')}">${c.w?'WhatsApp':'Call'} ${c.p}</a>`;
     const sec=c.a?`<a class="c" href="tel:${c.a.replace(/[^0-9+]/g,'')}">Call ${c.a}</a>`:'';
-    return `<div class="row"><div class="hn">${esc(c.n)}</div><div class="hv">${esc(c.v)}</div><div class="hb">${prim}${sec}</div></div>`;
+    return `<div class="row"><div class="hi"><div class="hn">${esc(c.n)}</div><div class="hv">${esc(c.v)}</div></div><div class="hb">${prim}${sec}</div></div>`;
   }).join('');
   const ab=document.getElementById('gotcAmbas');
-  ab.innerHTML=GOTC_AMBAS.map(a=>`<div class="row"><div class="hn">${esc(a.s)} &mdash; ${esc(a.n)}</div><div class="hb"><a class="c" href="tel:+60${a.p.replace(/[^0-9]/g,'').replace(/^0/,'')}">Call ${a.p}</a><a class="w" href="${waHref(a.p,'the Great Journey hospital')}">WhatsApp</a></div></div>`).join('');
+  ab.innerHTML=GOTC_AMBAS.map(a=>`<div class="row"><div class="hi"><div class="hn">${esc(a.s)}</div><div class="hv">${esc(a.n)}</div></div><div class="hb"><a class="c" href="tel:+60${a.p.replace(/[^0-9]/g,'').replace(/^0/,'')}">Call ${a.p}</a><a class="w" href="${waHref(a.p,'the Great Journey hospital')}">WhatsApp</a></div></div>`).join('');
 }
 
 function popup(h){
