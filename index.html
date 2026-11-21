@@ -131,7 +131,10 @@ h1{font-size:15.5px;margin:0;font-weight:700;line-height:1.25}
     Customer Service Careline: <a href="tel:1300130088">1300-1300 88</a> &nbsp;·&nbsp; Overseas: <a href="tel:+60342598888">+603 4259 8888</a><br>
     WhatsApp is not an official Great Eastern channel &#45; call or email instead, or ask your agent (TEE KOK WEI, 6328617).
   </div>
-  <div style="margin-top:14px"><button class="go" id="gotcGo">🎁 Show the Great Journey hospitals in my 128 list</button></div>
+  <div style="margin-top:16px;font-size:15px;font-weight:800;color:#1b2430">The 85 Great Journey hospitals in this list</div>
+  <div style="font-size:12px;color:#667085;margin:4px 0 10px">Tap Call to ring the hospital, or Google Maps / Waze to navigate.</div>
+  <div id="gotcList"></div>
+  <div style="margin-top:10px"><button class="go" id="gotcGo">🎁 Show them on the map</button></div>
   <div style="font-size:11.5px;color:#98a2b3;margin-top:12px;line-height:1.7">Source: Great Eastern Malaysia &#45; The Great Journey Hospital privileges (greateasternlife.com / greateasterntakaful.com).</div>
 </section>
 
@@ -211,6 +214,19 @@ function itemHTML(h, set){
       </div></div>`;
 }
 
+function fillGotc(){
+  const box=document.getElementById('gotcList');
+  if(box.dataset.filled==='1') return;
+  const arr=DATA.h.filter(h=>h.tgj), groups={};
+  arr.forEach(h=>{(groups[h.sl]=groups[h.sl]||[]).push(h)});
+  const keys=Object.keys(groups).sort((a,b)=>{
+    const oa=groups[a][0].oi, ob=groups[b][0].oi;
+    return oa!==ob ? oa-ob : a.localeCompare(b);
+  });
+  box.innerHTML=keys.map(k=>`<div class="stateblk"><div class="statehd"><div style="font-size:15px;font-weight:700">${k}</div><span>${groups[k].length}</span></div>${groups[k].map(h=>itemHTML(h,'h')).join('')}</div>`).join('');
+  box.dataset.filled='1';
+}
+
 function render(){
   const isPrv = setKey==='g';
   document.getElementById('gotc').style.display = isPrv?'block':'none';
@@ -226,6 +242,7 @@ function render(){
     document.getElementById('list').innerHTML='';
     document.getElementById('cnt').textContent='';
     if(clusterL){map.removeLayer(clusterL);clusterL=null;}
+    fillGotc();
     return;
   }
   const set=META[setKey];
